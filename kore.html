@@ -52,8 +52,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Kore | Redefining Ann Arbor Living</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -621,36 +619,38 @@
         function unlock() {
             const inputField = document.getElementById('pass-field');
             const error = document.getElementById('error');
-            
-            // Added .trim() to handle accidental spaces
+    
             if (inputField.value.trim() === ACCESS_KEY) {
-                try {
-                    localStorage.setItem(STORAGE_KEY, getNYDate());
-                } catch (e) {
-                    console.warn("LocalStorage blocked; session will not persist.");
-                }
-                showContent();
+            // 1. Force keyboard to close immediately
+            inputField.blur(); 
+        
+            try {
+                localStorage.setItem(STORAGE_KEY, getNYDate());
+            } catch (e) {}
+        
+            // 2. Delay content reveal slightly to let the keyboard start moving
+            setTimeout(showContent, 100); 
             } else {
-                error.classList.remove('opacity-0');
-                setTimeout(() => error.classList.add('opacity-0'), 2000);
+            error.classList.remove('opacity-0');
+            setTimeout(() => error.classList.add('opacity-0'), 2000);
             }
         }
 
         function showContent() {
-            // 1. Reveal the content
             document.getElementById('gate').classList.add('hidden-content');
             document.getElementById('content').classList.remove('hidden-content');
-            // 2. Unlock scrolling
             document.body.style.overflow = 'auto';
-            // 3. Reset Viewport Zoom
+
+            // 3. The "Triple-Kick" Viewport Reset
             const viewport = document.querySelector('meta[name="viewport"]');
             if (viewport) {
-            // Force the browser to snap back to 100% scale by temporarily disabling max-zoom
-            viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1';
-            // After a brief delay, restore the standard viewport to re-enable pinch-to-zoom
-            setTimeout(() => {
-            viewport.content = 'width=device-width, initial-scale=1';
-            }, 300);
+                // Set to non-scalable to force the snap back
+                viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+        
+                // Wait for the redraw, then restore user control
+                setTimeout(() => {
+                    viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=1';
+                }, 500); // 500ms is the "sweet spot" for iOS animation cycles
             }
         }
 
@@ -682,6 +682,9 @@
                 display: flex; align-items: center; justify-content: space-between;
                 padding: 0 24px; box-sizing: border-box; z-index: 99999;
                 font-family: 'IBM Plex Sans', sans-serif; color: #1a1a1a;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+                -webkit-backface-visibility: hidden;
             }
             .maugans-header-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
             .maugans-logo-svg { width: 20px; height: 20px; display: block; }
@@ -693,6 +696,8 @@
                 width: 100%; background: #f8f8f8; border: 1px solid #ececec; border-radius: 8px;
                 padding: 10px 64px 10px 14px; font-family: 'IBM Plex Sans', sans-serif; 
                 font-size: 16px; /* Change from 13px to 16px */
+                -webkit-text-size-adjust: 100%; /* Force Safari to respect 16px without inflation */
+                touch-action: manipulation; /* Optimizes for taps vs zooms */
                 outline: none; transition: all 0.2s ease; color: #1a1a1a;
             }
 

@@ -80,6 +80,9 @@
                 display: flex; align-items: center; justify-content: space-between;
                 padding: 0 24px; box-sizing: border-box; z-index: 99999;
                 font-family: 'IBM Plex Sans', sans-serif; color: #1a1a1a;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+                -webkit-backface-visibility: hidden;
             }
             .maugans-header-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
             .maugans-logo-svg { width: 20px; height: 20px; display: block; }
@@ -91,6 +94,8 @@
                 width: 100%; background: #f8f8f8; border: 1px solid #ececec; border-radius: 8px;
                 padding: 10px 64px 10px 14px; font-family: 'IBM Plex Sans', sans-serif; 
                 font-size: 16px; /* Change from 13px to 16px */
+                -webkit-text-size-adjust: 100%; /* Force Safari to respect 16px without inflation */
+                touch-action: manipulation; /* Optimizes for taps vs zooms */
                 outline: none; transition: all 0.2s ease; color: #1a1a1a;
             }
 
