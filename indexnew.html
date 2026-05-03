@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maugans co. | STAGING ENVIRONMENT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --maugans-accent: #04d9c4;
+            --maugans-off-black: #1a1a1a;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #fcfcfc;
+            margin: 0;
+            color: var(--maugans-off-black);
+            /* Maintain space for the fixed header */
+            padding-top: 64px !important;
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .letter-spacing-widest {
+            letter-spacing: 0.2em;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 48px 24px;
+            min-height: calc(100vh - 64px);
+            box-sizing: border-box;
+        }
+
+        h1, .maugans-header-title {
+            color: var(--maugans-off-black) !important;
+        }
+
+        .accent-text {
+            color: var(--maugans-accent) !important;
+        }
+
+        .accent-border {
+            border-color: rgba(4, 217, 196, 0.2) !important;
+        }
+
+        h1, p, a, input, button {
+            font-family: 'IBM Plex Sans', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <!-- Main Content Card -->
+        <main class="w-full max-w-md bg-white rounded-[2rem] p-10 md:p-14 card-shadow text-center flex flex-col items-center">
+            
+            <header class="mb-8">
+                <h1 class="text-2xl font-bold tracking-tight mb-2">maugans co.</h1>
+                <p class="text-[10px] font-semibold text-gray-400 uppercase letter-spacing-widest">
+                    Staging Environment
+                </p>
+            </header>
+
+            <div class="w-10 h-[1px] bg-gray-200 mb-10"></div>
+
+            <section class="space-y-6">
+                <p class="text-sm leading-relaxed text-gray-500 font-normal">
+                    This domain serves as a private staging and testing server for client projects currently under development.
+                </p>
+                <p class="text-sm leading-relaxed text-gray-500 font-normal">
+                    If you are a client looking for your work-in-progress build, please navigate to the exact secure URL provided to you.
+                </p>
+            </section>
+
+            <footer class="mt-12">
+                <a href="mailto:hello@maugansco.com" class="text-sm accent-text hover:opacity-80 transition-opacity border-b accent-border pb-0.5">
+                    hello@maugansco.com
+                </a>
+            </footer>
+        </main>
+
+        <!-- Footer Copyright -->
+        <footer class="mt-10">
+            <p class="text-[11px] text-gray-400 font-medium">
+                &copy; 2026 Maugans Co.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+    (function() {
+        const feedbackPrefix = "FEEDBACK";
+
+        const style = document.createElement('style');
+        style.textContent = `
+            #maugans-preview-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 64px;
+                background: #ffffff;
+                border-bottom: 1px solid #ececec;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 24px;
+                box-sizing: border-box;
+                z-index: 99999;
+                font-family: 'IBM Plex Sans', sans-serif;
+            }
+
+            .maugans-header-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex-shrink: 0;
+            }
+
+            .maugans-grid-icon {
+                display: grid;
+                grid-template-columns: repeat(3, 4px);
+                gap: 2px;
+            }
+
+            .maugans-dot {
+                width: 4px;
+                height: 4px;
+                background-color: #04d9c4;
+                border-radius: 50%;
+            }
+
+            .maugans-header-title {
+                font-weight: 600;
+                font-size: 14px;
+                letter-spacing: -0.01em;
+                color: #1a1a1a;
+            }
+
+            .maugans-header-title span {
+                color: #999;
+                font-weight: 400;
+                margin-left: 4px;
+            }
+
+            .maugans-input-container {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                display: flex;
+                align-items: center;
+                margin-left: auto; /* Push to the right */
+            }
+
+            #maugans-input {
+                width: 100%;
+                background: #f8f8f8;
+                border: 1px solid #ececec;
+                border-radius: 8px;
+                padding: 10px 64px 10px 14px;
+                font-family: 'IBM Plex Sans', sans-serif;
+                font-size: 13px;
+                outline: none;
+                transition: all 0.2s ease;
+                color: #1a1a1a;
+            }
+
+            #maugans-input:focus {
+                background: #fff;
+                border-color: #04d9c4;
+                box-shadow: 0 0 0 3px rgba(4, 217, 196, 0.08);
+            }
+
+            #maugans-submit {
+                position: absolute;
+                right: 8px;
+                background: transparent;
+                color: #04d9c4;
+                border: none;
+                padding: 6px 10px;
+                border-radius: 6px;
+                font-family: 'IBM Plex Sans', sans-serif;
+                font-weight: 600;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                opacity: 0;
+                pointer-events: none;
+                visibility: hidden;
+            }
+
+            #maugans-input:not(:placeholder-shown) + #maugans-submit {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            #maugans-submit:hover {
+                background: rgba(4, 217, 196, 0.08);
+            }
+
+            @media (max-width: 640px) {
+                #maugans-preview-header { padding: 0 12px; }
+                .maugans-header-title span { display: none; }
+                .maugans-input-container { 
+                    margin-left: 8px;
+                    max-width: none;
+                    flex-grow: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const header = document.createElement('header');
+        header.id = 'maugans-preview-header';
+        header.innerHTML = `
+            <div class="maugans-header-left">
+                <div class="maugans-grid-icon">
+                    <div class="maugans-dot"></div><div class="maugans-dot"></div><div class="maugans-dot"></div>
+                    <div class="maugans-dot"></div><div class="maugans-dot"></div><div class="maugans-dot"></div>
+                    <div class="maugans-dot"></div><div class="maugans-dot"></div><div class="maugans-dot"></div>
+                </div>
+                <div class="maugans-header-title">maugans co. <span>| preview</span></div>
+            </div>
+            <div class="maugans-input-container">
+                <input type="text" id="maugans-input" placeholder="Feedback or notes..." autocomplete="off">
+                <button id="maugans-submit">Send</button>
+            </div>
+        `;
+        document.body.prepend(header);
+
+        const submitBtn = document.getElementById('maugans-submit');
+        const inputField = document.getElementById('maugans-input');
+
+        const handleSubmit = () => {
+            const userInput = inputField.value.trim();
+            if (userInput) {
+                console.log("Processed Submission:", `${feedbackPrefix} ${userInput}`);
+                inputField.value = "";
+                inputField.placeholder = "Sent. Thank you!";
+                setTimeout(() => {
+                    inputField.placeholder = "Feedback or notes...";
+                }, 3000);
+            }
+        };
+
+        submitBtn.addEventListener('click', handleSubmit);
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSubmit();
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -11,10 +11,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
     <style>
-        body { font-family: 'IBM Plex Sans', sans-serif; }
+        body { font-family: 'IBM Plex Sans', sans-serif; padding-top: 64px !important;}
         .hidden-content { display: none !important; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -27,8 +26,13 @@
 
     <div id="gate" class="min-h-screen flex flex-col justify-center items-center p-6 hidden-content">
         <main class="max-w-lg w-full bg-white px-8 py-12 border border-slate-100 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center fade-in">
-            <h1 class="text-3xl font-medium tracking-tight text-slate-900 mb-1">maugans co.</h1>
-            <p class="text-xs font-medium text-[#04d9c4] uppercase tracking-[0.2em] mb-8">private preview</p>
+            <h1 class="text-2xl font-medium tracking-tight text-slate-900 mb-1">
+            maugans co.
+            </h1>
+        
+            <p class="text-[12px] font-normal text-gray-400 tracking-[0.15em] mb-8">
+            private preview
+            </p>
             
             <div class="w-10 h-[1px] bg-slate-200 mx-auto mb-8"></div>
             
@@ -44,9 +48,9 @@
         <footer class="mt-8 text-slate-400 text-xs">&copy; 2026 Maugans Co.</footer>
     </div>
 
-    <div id="content" class="hidden-content">
+    <div id="content" class="hidden-content kore-theme">
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,8 +60,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
+        .kore-theme { font-family: 'Inter', sans-serif; }        
         /* Custom scroll reveal utility classes to mimic the React component */
         .reveal-target {
             opacity: 0;
@@ -192,8 +195,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-neutral-100 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <nav class="fixed top-[64px] left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-neutral-100 transition-all duration-300">        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); event.preventDefault();" class="text-2xl font-bold tracking-tighter">KORE<span class="text-orange-600">.</span></a>
             
             <!-- Desktop Nav -->
@@ -564,19 +566,19 @@
 
         // Smooth Scroll Logic
         function scrollToSection(event, sectionId) {
-            event.preventDefault();
-            const element = document.getElementById(sectionId);
-            if (element) {
-                const navHeight = 80;
-                const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-                window.scrollTo({
-                    top: elementPosition - navHeight,
-                    behavior: 'smooth'
-                });
-                
-                if (navOpen) toggleMobileNav(); // Close mobile nav if open
-            }
+    event.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+        const navHeight = 144; // This is the height of your Kore nav
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: elementPosition - navHeight,
+            behavior: 'smooth'
+        });
+        
+        if (navOpen) toggleMobileNav();
         }
+    }
     </script>
 </body>
 </html>
@@ -635,13 +637,28 @@
         }
 
         function showContent() {
+            // 1. Reveal the content
             document.getElementById('gate').classList.add('hidden-content');
             document.getElementById('content').classList.remove('hidden-content');
+            // 2. Unlock scrolling
+            document.body.style.overflow = 'auto';
+            // 3. Reset Viewport Zoom
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+            // Force the browser to snap back to 100% scale by temporarily disabling max-zoom
+            viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+            // After a brief delay, restore the standard viewport to re-enable pinch-to-zoom
+            setTimeout(() => {
+            viewport.content = 'width=device-width, initial-scale=1';
+            }, 300);
+            }
         }
 
         function showGate() {
             document.getElementById('gate').classList.remove('hidden-content');
             document.getElementById('content').classList.add('hidden-content');
+            // Lock scrolling on the password gate
+            document.body.style.overflow = 'hidden'; 
         }
 
         document.getElementById('pass-field').addEventListener('keypress', (e) => {
@@ -650,5 +667,168 @@
 
         window.addEventListener('DOMContentLoaded', checkSession);
     </script>
+
+    <!-- Feedback Header Script -->
+    <script>
+    (function() {
+        const siteKey = "kore"; 
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbwxVHFojk0hCSB4hM7HvFSHNDXrfUAzJ_4HMEMRyglDaP8AMXY8rHNYTzZZsJvPBZIjGw/exec";
+
+        const style = document.createElement('style');
+        style.textContent = `
+            #maugans-preview-header {
+                position: fixed; top: 0; left: 0; width: 100%; height: 64px;
+                background: #ffffff; border-bottom: 1px solid #ececec;
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 0 24px; box-sizing: border-box; z-index: 99999;
+                font-family: 'IBM Plex Sans', sans-serif; color: #1a1a1a;
+            }
+            .maugans-header-left { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+            .maugans-logo-svg { width: 20px; height: 20px; display: block; }
+            .maugans-header-title { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
+            .maugans-header-title span { color: #999; font-weight: 400; margin-left: 4px; }
+            .maugans-input-container { position: relative; width: 100%; max-width: 400px; display: flex; align-items: center; margin-left: auto; }
+            
+            #maugans-input {
+                width: 100%; background: #f8f8f8; border: 1px solid #ececec; border-radius: 8px;
+                padding: 10px 64px 10px 14px; font-family: 'IBM Plex Sans', sans-serif; 
+                font-size: 16px; /* Change from 13px to 16px */
+                outline: none; transition: all 0.2s ease; color: #1a1a1a;
+            }
+
+            #maugans-input:focus { background: #fff; border-color: #04d9c4; box-shadow: 0 0 0 3px rgba(4, 217, 196, 0.08); }
+            #maugans-submit {
+                position: absolute; right: 8px; background: transparent; color: #04d9c4; border: none;
+                padding: 6px 10px; border-radius: 6px; font-family: 'IBM Plex Sans', sans-serif;
+                font-weight: 400; font-size: 16px; cursor: pointer; transition: all 0.2s ease;
+                opacity: 0; pointer-events: none; visibility: hidden;
+            }
+            #maugans-input:not(:placeholder-shown) + #maugans-submit { opacity: 1; visibility: visible; pointer-events: auto; }
+            #maugans-submit:hover { background: rgba(4, 217, 196, 0.08); }
+            #maugans-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+            @media (max-width: 750px) {
+            .maugans-header-title span { display: none; }
+            }
+            @media (max-width: 640px) {
+            #maugans-preview-header { padding: 0 12px; }
+            .maugans-input-container { margin-left: 8px; max-width: none; flex-grow: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const header = document.createElement('header');
+        header.id = 'maugans-preview-header';
+        header.innerHTML = `
+            <div class="maugans-header-left">
+                <svg class="maugans-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#04d9c4">
+                    <circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/>
+                    <circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/>
+                    <circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+                </svg>
+                <div class="maugans-header-title">maugans co. <span>|<span> private preview</span></div>
+            </div>
+            <div class="maugans-input-container">
+                <input type="text" id="maugans-input" placeholder="notes..." autocomplete="off">
+                <button id="maugans-submit">send</button>
+            </div>
+        `;
+        document.body.prepend(header);
+
+        const submitBtn = document.getElementById('maugans-submit');
+        const inputField = document.getElementById('maugans-input');
+
+        const handleSubmit = async () => {
+            const userInput = inputField.value.trim();
+            if (!userInput) return;
+
+            // Clear input and blur immediately
+            inputField.value = "";
+            inputField.placeholder = ""; 
+            inputField.blur();
+
+            // Set button to sending state
+            submitBtn.disabled = true;
+            submitBtn.innerText = "sending...";
+            
+            // Lock button visibility manually while input is blank
+            submitBtn.style.opacity = "1";
+            submitBtn.style.visibility = "visible";
+            submitBtn.style.pointerEvents = "none";
+
+            const deviceInfo = navigator.userAgent;
+            const scrollY = window.scrollY || window.pageYOffset;
+            const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+            const winHeight = window.innerHeight;
+            const scrollPercent = Math.round((scrollY / (docHeight - winHeight)) * 100) + "%";
+
+            const sections = document.querySelectorAll('[id]');
+            let nearestId = "none";
+            let closestDist = Infinity;
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                const dist = Math.abs(rect.top);
+                const ignoredIds = ['maugans-preview-header', 'gate', 'content'];
+                if (dist < closestDist && !ignoredIds.includes(sec.id)) {
+                    closestDist = dist;
+                    nearestId = "#" + sec.id;
+                }
+            });
+            
+            try {
+                await fetch(scriptUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        'timestamp': new Date().toLocaleString(),
+                        'site': siteKey,
+                        'nearestSection': nearestId,
+                        'scrollPercent': scrollPercent,
+                        'scrollPixels': scrollY + "px",
+                        'feedback': userInput,
+                        'device': deviceInfo
+                    })
+                });
+
+                // Success visual state
+                submitBtn.innerText = "note saved";
+                
+                setTimeout(() => {
+                    // Start fading out the button
+                    submitBtn.style.opacity = "0";
+
+                    // Wait for the fade (transition: 0.2s) before resetting text
+                    setTimeout(() => {
+                        // Reset visibility/opacity overrides so CSS takes back control
+                        submitBtn.style.opacity = "";
+                        submitBtn.style.visibility = "";
+                        submitBtn.style.pointerEvents = "";
+                        
+                        // Change text while it's invisible
+                        submitBtn.innerText = "send";
+                        // Restore placeholder
+                        inputField.placeholder = "notes..."; 
+                        submitBtn.disabled = false;
+                    }, 250);
+
+                }, 1500);
+
+            } catch (error) {
+                submitBtn.innerText = "error";
+                setTimeout(() => {
+                    submitBtn.style.opacity = "";
+                    submitBtn.style.visibility = "";
+                    submitBtn.innerText = "send";
+                    inputField.placeholder = "notes...";
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        };
+
+        submitBtn.addEventListener('click', handleSubmit);
+        inputField.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSubmit(); });
+    })();
+    </script>
+
 </body>
 </html>
