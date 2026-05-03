@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
     <title>maugans co. | private preview</title>
 
@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">    
     <style>
-        body { font-family: 'IBM Plex Sans', sans-serif; padding-top: 64px !important;}
+        body { font-family: 'IBM Plex Sans', sans-serif; padding-top: calc(64px + env(safe-area-inset-top)) !important;}
         .hidden-content { display: none !important; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -643,14 +643,13 @@
 
             // 3. The "Triple-Kick" Viewport Reset
             const viewport = document.querySelector('meta[name="viewport"]');
-            if (viewport) {
-                // Set to non-scalable to force the snap back
-                viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
-        
-                // Wait for the redraw, then restore user control
+                if (viewport) {
+                viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover';
+
                 setTimeout(() => {
-                    viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=1';
-                }, 500); // 500ms is the "sweet spot" for iOS animation cycles
+                    // Keep maximum-scale=1.0 to guarantee zero form zoom
+                    viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover';
+                }, 500); 
             }
         }
 
@@ -677,10 +676,14 @@
         const style = document.createElement('style');
         style.textContent = `
             #maugans-preview-header {
-                position: fixed; top: 0; left: 0; width: 100%; height: 64px;
+                position: fixed; top: 0; left: 0; width: 100%; height: calc(64px + env(safe-area-inset-top));
                 background: #ffffff; border-bottom: 1px solid #ececec;
                 display: flex; align-items: center; justify-content: space-between;
-                padding: 0 24px; box-sizing: border-box; z-index: 99999;
+                padding-top: env(safe-area-inset-top);
+                padding-right: 24px;
+                padding-bottom: 0;
+                padding-left: 24px;
+                box-sizing: border-box; z-index: 99999;
                 font-family: 'IBM Plex Sans', sans-serif; color: #1a1a1a;
                 -webkit-transform: translate3d(0,0,0);
                 transform: translate3d(0,0,0);
