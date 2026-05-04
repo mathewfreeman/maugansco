@@ -111,7 +111,6 @@
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         
-        /* Structured grid borders */
         .grid-borders > div {
             border-bottom: 1px solid theme('colors.sage.200');
         }
@@ -124,7 +123,6 @@
             }
         }
 
-        /* Sharp inputs */
         .input-sharp {
             border: 1px solid theme('colors.sage.200');
             background: transparent;
@@ -194,7 +192,7 @@
                 <h1 class="sr-only">Healthcare is a human right. Transforming Healthcare Through Equitable Action.</h1>
                 
                 <div class="fade-up w-full flex flex-col items-center">
-                    <!-- Custom Typographic Graphic -->
+                    <!-- Graphic -->
                     <div class="w-full max-w-5xl mb-12 lg:mb-16">
                         <img src="images/human.png" alt="Healthcare is a human right." class="w-full h-auto object-contain" />
                     </div>
@@ -228,7 +226,7 @@
                         <img src="images/hadley portrait.jpg" alt="Portrait of Hadley Huffman" class="object-cover w-full h-full grayscale-[30%]" />
                         <div class="absolute bottom-0 left-0 bg-white p-6 border-t border-r border-sage-200">
                             <h3 class="font-serif text-xl text-sage-900">Hadley Huffman</h3>
-                            <p class="text-sage-500 text-xs uppercase tracking-widest mt-1">1999 — 2021</p>
+                            <p class="text-sage-500 text-xs uppercase tracking-widest mt-1">2000 — 2021</p>
                         </div>
                     </div>
                 </div>
@@ -250,19 +248,19 @@
                         </p>
                     </div>
 
-                    <!-- Additional Images Grid -->
+                    <!-- Images Grid -->
                     <div class="mt-12 grid grid-cols-2 gap-6">
                         <div class="h-64 relative border border-sage-200 group">
-                            <!-- Placeholder: Volunteering/Portugal -->
+                            <!-- Volunteering/Portugal -->
                             <img src="images/hadley medical.jpg" alt="Volunteering abroad" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" />
                         </div>
                         <div class="grid grid-rows-2 gap-6">
                             <div class="relative border border-sage-200 group h-[calc(8rem-0.75rem)]">
-                                <!-- Placeholder: Early Aspirations / Childhood Doctor Photo -->
+                                <!-- Childhood Doctor Photo -->
                                 <img src="images/hadley childhood.jpg" alt="Early aspirations" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 object-top" />
                             </div>
                             <div class="relative border border-sage-200 group h-[calc(8rem-0.75rem)]">
-                                <!-- Placeholder: Community/Advocacy -->
+                                <!-- Community/Advocacy -->
                                 <img src="images/hadley travel.jpg" alt="Advocacy" class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500" />
                             </div>
                         </div>
@@ -508,7 +506,7 @@
                         <p class="text-sage-300 text-sm font-light leading-relaxed mb-4">
                             The New England Journal of Medicine commissioned an independent group of historians to examine historical inequities and injustices.
                         </p>
-                        <a href="#" class="inline-flex items-center text-xs uppercase tracking-widest font-medium text-sage-400 hover:text-white transition-colors">
+                        <a href="https://www.nejm.org/recognizing-historical-injustices" target="_blank" class="inline-flex items-center text-xs uppercase tracking-widest font-medium text-sage-400 hover:text-white transition-colors">
                             Explore Findings <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
                         </a>
                     </div>
@@ -824,6 +822,7 @@
 
         window.addEventListener('DOMContentLoaded', checkSession);
     </script>
+
     <!-- Feedback Header Script -->
     <script>
     (function() {
@@ -943,7 +942,7 @@
                         'scrollPixels': scrollY + "px",
                         'feedback': userInput,
                         'device': deviceInfo
-                    })
+                    }) .toString()
                 });
 
                 // Success visual state
